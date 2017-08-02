@@ -28,6 +28,11 @@ function fromInstance(nedbInstance) {
 		return cursor
 	}
 
+  // added by bslee
+  newDB.compact = function() {
+		nedbInstance.persistence.compactDatafile()
+  }
+
 	return newDB
 }
 
