@@ -30,7 +30,13 @@ function fromInstance(nedbInstance) {
 
   // added by bslee
   newDB.compact = function() {
-		nedbInstance.persistence.compactDatafile()
+    return new Promise(function(resolve, reject) {
+      nedbInstance.on('compaction.done', function () {
+        nedbInstance.removeAllListeners('compaction.done')
+        resolve()
+      });
+      nedbInstance.persistence.compactDatafile()
+    });
   }
 
 	return newDB
