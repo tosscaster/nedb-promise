@@ -29,6 +29,7 @@ function fromInstance(nedbInstance) {
 	}
 
   // added by bslee
+  /*
   newDB.compact = function() {
     return new Promise(function(resolve, reject) {
       nedbInstance.on('compaction.done', function () {
@@ -37,6 +38,10 @@ function fromInstance(nedbInstance) {
       });
       nedbInstance.persistence.compactDatafile()
     });
+  }
+  */
+  newDB.compact = function() {
+    nedbInstance.persistence.compactDatafile()
   }
 
 	return newDB
