@@ -40,8 +40,12 @@ function fromInstance(nedbInstance) {
     });
   }
   */
-  newDB.compact = function() {
+
+  newDB.compact = function(cb) {
     nedbInstance.persistence.compactDatafile()
+    if (typeof cb === 'function') {
+      nedbInstance.once('compaction.done', cb)
+    }
   }
 
 	return newDB
