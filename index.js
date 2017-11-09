@@ -29,17 +29,9 @@ function fromInstance(nedbInstance) {
 	}
 
   // added by bslee
-  /*
-  newDB.compact = function() {
-    return new Promise(function(resolve, reject) {
-      nedbInstance.on('compaction.done', function () {
-        nedbInstance.removeAllListeners('compaction.done')
-        resolve()
-      });
-      nedbInstance.persistence.compactDatafile()
-    });
+  newDB.setAutocompactionInterval = function(interval) {
+    nedbInstance.persistence.setAutocompactionInterval(interval)
   }
-  */
 
   newDB.compact = function(cb) {
     nedbInstance.persistence.compactDatafile()
